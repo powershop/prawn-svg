@@ -39,15 +39,19 @@ class Prawn::SVG::Document
     )
 
     @sizing = Prawn::SVG::Calculators::DocumentSizing.new(bounds, @root.attributes)
-    sizing.requested_width = options[:width]
-    sizing.requested_height = options[:height]
-    sizing.calculate
+    calculate_sizing(requested_width: options[:width], requested_height: options[:height])
 
     @axis_to_size = {:x => sizing.viewport_width, :y => sizing.viewport_height}
 
     @css_parser = CssParser::Parser.new
 
     yield self if block_given?
+  end
+
+  def calculate_sizing(requested_width: nil, requested_height: nil)
+    sizing.requested_width = requested_width
+    sizing.requested_height = requested_height
+    sizing.calculate
   end
 
   def x(value)
