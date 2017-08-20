@@ -19,6 +19,11 @@ module Prawn
         svg.draw
         {:warnings => svg.document.warnings, :width => svg.document.sizing.output_width, :height => svg.document.sizing.output_height}
       end
+
+      def make_svg_cell(data, options = {}, &block)
+        options.merge!(:svg_data => data)
+        Prawn::Table::Cell::SVG.new(self, [0, cursor], options, &block)
+      end if defined?(Prawn::Table::Cell)
     end
   end
 end
