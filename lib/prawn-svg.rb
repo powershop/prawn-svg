@@ -27,6 +27,8 @@ require 'prawn/svg/font'
 require 'prawn/svg/document'
 require 'prawn/svg/state'
 
+require 'prawn/table/cell/svg' if defined?(Prawn::Table::Cell)
+
 module Prawn
   Svg = SVG # backwards compatibility
 end
